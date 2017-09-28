@@ -8,6 +8,25 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <header>
+    MUSIC APP
+    <% if logged_in? %>
+      <%= current_user.email %>
+      <%= button_to  "Logout", session_url, method: :delete%>
+    <% else %>
+      <%= link_to "Sign In", new_session_url %>
+      <%= link_to "Sign Up", new_session_url %>
+    <% end %>
+  </header>
+
+  <div class="errors">
+    <ul>
+      <% flash[:errors].try(:each) do |err| %>
+        <li><%= err %></li>
+      <% end %>
+    </ul>
+  </div>
+
   <body>
     <%= yield %>
   </body>
